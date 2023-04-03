@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Automated Ticketing</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Automated Ticketing</h1>
+        <form id = "new-submission">
+            <input
+                type="text"
+                id = "new-input"
+                placeholder="Submit a question" />
+            <input
+                type="submit"
+                id="submit-input"
+                value="Add question"/>
+
+        </form>
+    </header>
+
+    <main>
+        <section class="questions-list">
+            <h2>Question Queue</h2>
+
+            <div id="tasks">
+                <div class="task">
+                    <div class="content">
+                        <input 
+                            type="text"
+                            class="text"
+                            value="recent"
+                            readonly
+                        />
+                    </div>
+                    <div class="actions">
+                        <button class="edit">Edit</button>
+                        <button class="delete">delete</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="root.js"></script>
+</body>
+</html>
