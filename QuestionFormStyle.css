@@ -1,1 +1,65 @@
+*{
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: rgb(39, 38, 38);
+    color:gray;
+}
+
+header{
+    padding: 5rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header h1{
+    font-size: 2.5rem;
+    font-weight: 300;
+    color:aqua;
+}
+
+#new-submission{
+    display: flex;
+
+}
+
+input,button{
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+
+}
+
+#new-input{
+    flex: 1 1 0%;
+    padding: 1rem;
+    background-color: rgb(29, 28, 28);
+    border-radius: 1rem;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+#submit-input{
+    color:rgb(40, 98, 116);
+    font-size: 1.5rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right, pink, purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    transition: 0.4s;
+ 
+}
+#submit-input:hover{
+    opacity: 0.8;
+}
+#submit-input:active{
+    opacity: 1.8;
+}
 
