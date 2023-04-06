@@ -63,3 +63,17 @@ input,button{
     opacity: 1.8;
 }
 
+section h2{
+    margin-left: 15px;
+}
+#Question-List-display{
+    width: 500px;
+    flex: 1 1 0%;
+    text-align:center;
+    padding: 3rem;
+    background-color: rgb(214, 214, 214);
+    border-radius: 1rem;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    
+}
