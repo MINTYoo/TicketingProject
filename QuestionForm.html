@@ -8,15 +8,9 @@
 <body>
     <header>
         <h1>Welcome to Automated Ticketing</h1>
-            <form action ="id.php" id = "new-submission" method ="POST">              
-                <input
-                    type="text"
-                    id = "new-input"
-                    placeholder="Submit a question:" />
-                <input
-                    type="submit"
-                    id="submit-input"
-                    value="Add question"/>                      
+            <form action ='/sendticket' method ="POST">              
+                <input type="text" name="user_input" />
+                <input type="submit" value="Add question"/>                      
             </form>
     </header>
        
