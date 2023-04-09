@@ -8,9 +8,10 @@
 <body>
     <header>
         <h1>Welcome to Automated Ticketing</h1>
-            <form action ='/sendticket' method ="POST">              
+        <!--don't change /sendticket and the name of user-input as it's used to parse teh POST method-->
+            <form action ='/sendticket' name="new-submission" method ="POST">              
                 <input type="text" name="user_input" />
-                <input type="submit" value="Add question"/>                      
+                <input type="submit" id="submit-input" value="Add question"/>                      
             </form>
     </header>
        
