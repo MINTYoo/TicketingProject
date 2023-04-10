@@ -37,7 +37,11 @@ button {
 
 }
 
+<<<<<<< HEAD
 #new-input {
+=======
+#user-input{
+>>>>>>> d813bb74c6d1796d438160675ee0c9a6cce9ed51
     flex: 1 1 0%;
     padding: 1rem;
     background-color: rgb(29, 28, 28);
