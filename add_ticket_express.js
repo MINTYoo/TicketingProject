@@ -3,7 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 const { MongoClient } = require("mongodb");
 
-const uri = "mongodb+srv://USER:PASS@avengerscluster.2s0a1da.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://naras004:zEE367@&GxpL8Av@avengerscluster.2s0a1da.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 const app = express()
 
@@ -12,11 +12,34 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/QuestionForm.html')
-  })
-  
+  res.sendFile(__dirname + '/ID_index.html')
+})
+
 app.use(express.static(__dirname));
 
+var userID = null;
+app.post('/submitID', (req, res) => {
+  userID = req.body.input;
+  console.log("logged in userid: ", userID);
+  res.redirect('QuestionForm.html');
+});
+
+app.post('/test', (req, res) => {
+  const userInput = req.body.input;
+  console.log(userInput); // Output the user's input to the console
+
+
+  // You can now use the userInput variable to process the user's input
+  res.redirect('QuestionForm.html');
+});
+
+
+
+
+
+
+
+/*
 app.post('/sendticket', function (req, res) {
         let output = req.body.user_input;
         var data = {
@@ -32,7 +55,12 @@ app.post('/sendticket', function (req, res) {
         
 });
 
+*/
+
+
+
+
 app.listen(3000, () => {
-    console.log('Running on port 3000!')
-  })
+  console.log('Running on port 3000!')
+})
 
