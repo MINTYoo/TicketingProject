@@ -10,30 +10,40 @@
 <body>
     <header>
         <h1>Welcome to Automated Ticketing</h1>
-        <form action='/sendticket' method="POST">
-            <input type="text" name="user_input" />
-            <input type="submit" value="Add question" />
-        </form>
     </header>
 
 
+    <button id="show-form-btn">New</button>
+    <div id="form-container" style="display: none;">
+        <form action="/newTicket" method="post">
+            <label for="input">Issue:</label>
+            <input type="text" id="input" name="input">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 
+    <script>
+        const showFormBtn = document.getElementById("show-form-btn");
+        const formContainer = document.getElementById("form-container");
 
+        showFormBtn.addEventListener("click", () => {
+            if (formContainer.style.display === "none") {
+                formContainer.style.display = "block";
+            } else {
+                formContainer.style.display = "none";
+            }
+        });
 
+    </script>
 
-    <form action="/test" method="post">
-        <label for="input">Input:</label>
+    <br>
+    <br>
+    <br>
+    <form action="/searchTicket" method="post">
+        <label for="input">TicketID:</label>
         <input type="text" id="input" name="input">
-        <button type="submit">Submit</button>
+        <button type="submit">Search</button>
     </form>
-
-
-
-
-
-
-
-
 
 
 
