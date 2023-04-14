@@ -3,11 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 const { MongoClient } = require("mongodb");
 
-<<<<<<< HEAD
 const uri = "mongodb+srv://naras004:zEE367%40&GxpL8Av@avengerscluster.2s0a1da.mongodb.net/?retryWrites=true&w=majority";
-=======
-const uri = "mongodb+srv://user:pass@avengerscluster.2s0a1da.mongodb.net/?retryWrites=true&w=majority";
->>>>>>> d813bb74c6d1796d438160675ee0c9a6cce9ed51
 const client = new MongoClient(uri);
 const app = express()
 
@@ -58,20 +54,21 @@ app.post('/searchTicket', (req, res) => {
   const database = client.db('TicketDataCollection');
   const TicketItself = database.collection('TicketData');
 
-  TicketItself.findOne({ _id: inputticketID }, (err, ticket) => {
-    if (err) {
+  TicketItself.findOne({ ticketID: inputticketID })
+    .then(ticket => {
+      if (ticket) {
+        console.log(ticket.ticketdata);
+        res.redirect('QuestionForm.html');
+      } else {
+        console.log('Ticket not found');
+        res.redirect('QuestionForm.html');
+      }
+    })
+    .catch(err => {
       console.error(err);
-      res.status(500).send('An error occurred');
-    } else if (!ticket) {
-      console.log(`Ticket with ID ${inputticketID} not found`);
-      res.status(404).send('Ticket not found');
-    } else {
-      console.log(ticket.ticketdata); // Output the ticket data to the console
       res.redirect('QuestionForm.html');
-    }
-  });
+    });
 });
-
 
 
 
