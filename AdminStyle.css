@@ -1,0 +1,88 @@
+/* Set up the overall layout */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Set up the header */
+header {
+  background-color: #551bc0;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Set up the ticket container */
+.ticket-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/* Set up the ticket list */
+.ticket-list {
+  width: 25%;
+  background-color: #272626;
+  padding: 20px;
+}
+
+/* Set up the ticket list items */
+.ticket-list-item {
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Set up the selected ticket */
+.selected-ticket {
+  width: 75%;
+  padding: 20px;
+}
+
+/* Set up the ticket details */
+.ticket-details {
+  border-bottom: 1px solid #222020;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+/* Set up the ticket fields */
+.ticket-field {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+/* Set up the ticket field labels */
+.ticket-field-label {
+  font-weight: bold;
+  margin-right: 10px;
+  width: 150px;
+}
+
+/* Set up the ticket field values */
+.ticket-field-value {
+  flex: 1;
+}
+
+/* Set up the ticket status */
+.ticket-status {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #171717;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Set up the ticket priority */
+.ticket-priority {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #12fd16;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
