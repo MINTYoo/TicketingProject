@@ -2,11 +2,12 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 const { MongoClient } = require("mongodb");
-
 const uri = "mongodb+srv://naras004:zEE367%40&GxpL8Av@avengerscluster.2s0a1da.mongodb.net/?retryWrites=true&w=majority";
+
 const client = new MongoClient(uri);
 const app = express()
-
+const cors = require('cors');
+app.use(cors());
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -16,6 +17,10 @@ app.get('/', (req, res) => {
 })
 
 app.use(express.static(__dirname));
+
+const database = client.db('TicketDataCollection');
+const TicketItself = database.collection('TicketData');
+
 
 var userID = null;
 app.post('/submitID', (req, res) => {
@@ -38,8 +43,7 @@ app.post('/newTicket', (req, res) => {
     "issuerID": userID,
     "responderID": null
   }
-  const database = client.db('TicketDataCollection');
-  const TicketItself = database.collection('TicketData');
+
   TicketItself.insertOne(data);
   // You can now use the userInput variable to process the user's input
   res.redirect('QuestionForm.html');
@@ -51,16 +55,32 @@ app.post('/searchTicket', (req, res) => {
   const inputticketID = parseInt(req.body.input);
   console.log(inputticketID); // Output the user's input to the console
 
-  const database = client.db('TicketDataCollection');
-  const TicketItself = database.collection('TicketData');
-
   TicketItself.findOne({ ticketID: inputticketID })
     .then(ticket => {
       if (ticket) {
         console.log(ticket.ticketdata);
-        res.redirect('QuestionForm.html');
+        res.json(ticket); // Send the ticket data as a JSON response
       } else {
         console.log('Ticket not found');
+        res.status(404).send('Ticket not found'); // Return a 404 status if the ticket is not found
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Internal Server Error'); // Return a 500 status if there's an error
+    });
+});
+app.post('/listTickets', (req, res) => {
+
+  TicketItself.find({ responderID: null })
+    .toArray()
+    .then(tickets => {
+      if (tickets.length > 0) {
+        const ticketIDs = tickets.map(ticket => ticket.ticketID);
+        console.log(ticketIDs);
+        res.redirect('QuestionForm.html');
+      } else {
+        console.log('No tickets found');
         res.redirect('QuestionForm.html');
       }
     })
@@ -70,8 +90,16 @@ app.post('/searchTicket', (req, res) => {
     });
 });
 
+app.listen(3000, () => {
+  console.log('Running on port 3000!')
+})
 
 
+app.get('/tickets', async (req, res) => {
+  const tickets = await TicketItself.distinct('ticketID');
+  console.log("Called /tickets");
+  res.json(tickets);
+});
 
 /*
 app.post('/sendticket', function (req, res) {
@@ -89,9 +117,6 @@ app.post('/sendticket', function (req, res) {
         
 });
 
-*/
-
-
 app.post('/viewticket', function (req, res) {
   const database = client.db('TicketDataCollection');
   const TicketItself = database.collection('TicketData');
@@ -99,8 +124,4 @@ app.post('/viewticket', function (req, res) {
   const cursor = TicketItself.find(query);
   document.write(cursor);
 });
-
-app.listen(3000, () => {
-  console.log('Running on port 3000!')
-})
-
+*/
