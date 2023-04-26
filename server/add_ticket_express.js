@@ -49,44 +49,47 @@ app.post('/newTicket', (req, res) => {
   res.redirect('QuestionForm.html');
 });
 
+app.post('/respondTicket', async (req, res) => {
+  const inputticketID = parseInt(req.body.input);
+  const inputresponderID = parseInt(req.body.responseResponderID);
+  var inputresponsestr = req.body.responsestr;
+
+  const existingTicket = await TicketItself.findOne({ ticketID: inputticketID });
+  inputresponsestr = existingTicket.ticketdata + "\n---\n" + inputresponsestr;
+
+  // Update the ticket with the new ticketdata value and responderID value
+  const updatedTicket = await TicketItself.findOneAndUpdate(
+    { ticketID: inputticketID },
+    { $set: { ticketdata: inputresponsestr, responderID: inputresponderID } },
+    { new: true }
+  );
+
+  res.send(updatedTicket);
+});
+
+
 const { ObjectId } = require('mongodb'); // import the ObjectId function
 
 app.post('/searchTicket', (req, res) => {
   const inputticketID = parseInt(req.body.input);
-  console.log(inputticketID); // Output the user's input to the console
+  //console.log(inputticketID); // Output the user's input to the console
 
   TicketItself.findOne({ ticketID: inputticketID })
     .then(ticket => {
       if (ticket) {
-        console.log(ticket.ticketdata);
-        res.json(ticket); // Send the ticket data as a JSON response
+        res.json({
+          issuerID: ticket.issuerID,
+          ticketdata: ticket.ticketdata,
+          color: ticket.color // Include the 'color' field in the response
+        });
       } else {
         console.log('Ticket not found');
-        res.status(404).send('Ticket not found'); // Return a 404 status if the ticket is not found
+        res.status(404).send('Ticket not found');
       }
     })
     .catch(err => {
       console.error(err);
-      res.status(500).send('Internal Server Error'); // Return a 500 status if there's an error
-    });
-});
-app.post('/listTickets', (req, res) => {
-
-  TicketItself.find({ responderID: null })
-    .toArray()
-    .then(tickets => {
-      if (tickets.length > 0) {
-        const ticketIDs = tickets.map(ticket => ticket.ticketID);
-        console.log(ticketIDs);
-        res.redirect('QuestionForm.html');
-      } else {
-        console.log('No tickets found');
-        res.redirect('QuestionForm.html');
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      res.redirect('QuestionForm.html');
+      res.status(500).send('Internal Server Error');
     });
 });
 
@@ -97,31 +100,5 @@ app.listen(3000, () => {
 
 app.get('/tickets', async (req, res) => {
   const tickets = await TicketItself.distinct('ticketID');
-  console.log("Called /tickets");
   res.json(tickets);
 });
-
-/*
-app.post('/sendticket', function (req, res) {
-        let output = req.body.user_input;
-        var data = {
-            "user_input": output,
-            "priority": 1,
-            "color": 3
-        }
-        const database = client.db('TicketDataCollection');
-        const TicketItself = database.collection('TicketData');
-        TicketItself.insertOne(data);
-        res.redirect('QuestionForm.html');
-        //res.send('Data received:\n' + JSON.stringify(req.body));
-        
-});
-
-app.post('/viewticket', function (req, res) {
-  const database = client.db('TicketDataCollection');
-  const TicketItself = database.collection('TicketData');
-  const query = { id: userid };
-  const cursor = TicketItself.find(query);
-  document.write(cursor);
-});
-*/

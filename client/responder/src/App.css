@@ -2,23 +2,12 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-
 }
 
 .ticket-list-header {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
-}
-
-.ticket-list-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  cursor: pointer;
 }
 
 .ticket-list {
@@ -28,36 +17,37 @@
   width: 200px;
   height: 300px;
   overflow: auto;
-
 }
 
 .ticket-list li {
-  background-color: #f2f2f2;
+  background-color: gray;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 4px;
   cursor: pointer;
-  background-color: gray;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .ticket-list li:hover {
-  background-color: #ddd;
+  background-color: darkgray;
 }
 
 .selected-ticket-container {
   margin-top: 20px;
-  background-color: #f2f2f2;
+  background-color: gray;
   padding: 20px;
   border-radius: 4px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-
 }
 
-.selected-ticket-container h3 {
-  font-size: 20px;
+.selected-ticket-container span {
+  font-weight: bold;
   margin-bottom: 10px;
+  display: block;
+  text-align: center;
+  font-size: 18px;
 }
 
 .selected-ticket-container span {
@@ -72,4 +62,63 @@
   height: 400px;
   margin-top: 10px;
   resize: vertical;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  align-items: center;
+}
+
+label {
+  text-align: right;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+}
+
+.ticket-list-button {
+  background-color: #a3089b;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition-duration: 0.3s;
+}
+
+.ticket-list-button:hover {
+  background-color: #aa07a2;
+  box-shadow: 0px 2px 5px rgba(73, 0, 57, 0.973);
+}
+
+/* Style the button with the ID of "submitbutton" */
+#submitbutton {
+  background-color: #a3089b;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition-duration: 0.3s;
+}
+
+/* On hover, change the button's background color and add a shadow effect */
+#submitbutton:hover {
+  background-color: #aa07a2;
+  box-shadow: 0px 2px 5px rgba(73, 0, 57, 0.973);
 }
