@@ -1,6 +1,8 @@
 .ticket-list-container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 1000px;
+  /* Increase max-width to make the list wider */
+  margin: 0;
+  /* Remove the margin to move the list to the left */
   padding: 20px;
 }
 
@@ -103,7 +105,7 @@ textarea {
 
 /* Style the button with the ID of "submitbutton" */
 #submitbutton {
-  background-color: #a3089b;
+  background-color: #131313;
   border: none;
   color: white;
   padding: 12px 24px;
@@ -119,10 +121,14 @@ textarea {
 
 /* On hover, change the button's background color and add a shadow effect */
 #submitbutton:hover {
-  background-color: #aa07a2;
-  box-shadow: 0px 2px 5px rgba(73, 0, 57, 0.973);
+  background-color: #585858;
+  box-shadow: 0px 2px 5px rgba(49, 49, 49, 0.973);
 }
 
 .background {
   background-color: #333;
+}
+
+.searchcontainer {
+  text-align: center;
 }

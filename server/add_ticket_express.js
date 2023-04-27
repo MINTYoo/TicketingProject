@@ -51,22 +51,51 @@ app.post('/newTicket', (req, res) => {
 });
 
 app.post('/respondTicket', async (req, res) => {
-  const inputticketID = parseInt(req.body.input);
+  if (!req.body.responsestr) {
+    return res.status(400).send({ error: 'Missing or empty input data' });
+  }
+
+  try {
+    const inputticketID = parseInt(req.body.input);
+    const inputresponderID = parseInt(req.body.responseResponderID);
+    var inputresponsestr = req.body.responsestr;
+    const existingTicket = await TicketItself.findOne({ ticketID: inputticketID });
+    inputresponsestr = existingTicket.ticketdata + "\n---\nResponder: " + inputresponderID + "\n" + inputresponsestr;
+
+    // Update the ticket with the new ticketdata value and responderID value
+    const updatedTicket = await TicketItself.findOneAndUpdate(
+      { ticketID: inputticketID },
+      { $set: { ticketdata: inputresponsestr, responderID: inputresponderID } },
+      { new: true }
+    );
+
+    res.send(updatedTicket);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: 'Internal server error' });
+  }
+});
+
+
+
+
+
+app.post('/closeticket', async (req, res) => {
+  const inputticketID = parseInt(req.body.inputticketID);
   const inputresponderID = parseInt(req.body.responseResponderID);
-  var inputresponsestr = req.body.responsestr;
-  console.log(inputresponderID);
   const existingTicket = await TicketItself.findOne({ ticketID: inputticketID });
-  inputresponsestr = existingTicket.ticketdata + "\n---\nResponder: " + inputresponderID + "\n" + inputresponsestr;
+  var tempticketdata = existingTicket.ticketdata + "\n---\n CLOSED BY: " + inputresponderID;
 
   // Update the ticket with the new ticketdata value and responderID value
   const updatedTicket = await TicketItself.findOneAndUpdate(
     { ticketID: inputticketID },
-    { $set: { ticketdata: inputresponsestr, responderID: inputresponderID } },
+    { $set: { status: "closed", ticketdata: tempticketdata } },
     { new: true }
   );
-
+  console.log("closed ticket called successfully");
   res.send(updatedTicket);
 });
+
 
 
 const { ObjectId } = require('mongodb'); // import the ObjectId function
@@ -100,6 +129,6 @@ app.listen(3000, () => {
 
 
 app.get('/tickets', async (req, res) => {
-  const tickets = await TicketItself.distinct('ticketID');
+  const tickets = await TicketItself.distinct('ticketID', { status: { $ne: 'closed' } });
   res.json(tickets);
 });
