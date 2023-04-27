@@ -1,8 +1,10 @@
+
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 const { MongoClient } = require("mongodb");
-const uri = "mongodb+srv://naras004:zEE367%40&GxpL8Av@avengerscluster.2s0a1da.mongodb.net/?retryWrites=true&w=majority";
+
+const uri = "mongodb+srv://naras004:zEE367%40&GxpL8Av@avengerscluster.2s0a1da.mongodb.net/?retryWrites=true&w=majority"
 
 const client = new MongoClient(uri);
 const app = express()
