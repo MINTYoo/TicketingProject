@@ -22,7 +22,6 @@ const database = client.db('TicketDataCollection');
 const TicketItself = database.collection('TicketData');
 
 
-var userID = null;
 app.post('/submitID', (req, res) => {
   userID = req.body.input;
   console.log("logged in userid: ", userID);
@@ -53,9 +52,9 @@ app.post('/respondTicket', async (req, res) => {
   const inputticketID = parseInt(req.body.input);
   const inputresponderID = parseInt(req.body.responseResponderID);
   var inputresponsestr = req.body.responsestr;
-
+  console.log(inputresponderID);
   const existingTicket = await TicketItself.findOne({ ticketID: inputticketID });
-  inputresponsestr = existingTicket.ticketdata + "\n---\n" + inputresponsestr;
+  inputresponsestr = existingTicket.ticketdata + "\n---\nResponder: " + inputresponderID + "\n" + inputresponsestr;
 
   // Update the ticket with the new ticketdata value and responderID value
   const updatedTicket = await TicketItself.findOneAndUpdate(

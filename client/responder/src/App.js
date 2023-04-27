@@ -4,7 +4,7 @@ import './App.css';
 
 
 var globalTicketID = 0;
-var localResponderID = 999999;
+var localResponderID = 999;
 
 function TicketList() {
   const [tickets, setTickets] = useState([]);
@@ -28,7 +28,7 @@ function TicketList() {
     axios.post('http://localhost:3000/respondTicket', {
       input: globalTicketID,
       responsestr: responseString, // change key name to match server-side handler
-      response: localResponderID
+      responseResponderID: localResponderID
 
     })
       .then((response) => {
@@ -43,44 +43,47 @@ function TicketList() {
   };
 
   return (
-    <div className="ticket-list-container">
-      <h2 className="ticket-list-header">Ticket List</h2>
-      <button className="ticket-list-button" onClick={handleButtonClick}>Fetch Tickets</button>
-      <br></br>
-      Ticket IDs:
-      <ul className="ticket-list">
-        {tickets.map((ticket) => (
-          <li
-            key={ticket.id}
-            onClick={() => handleTicketClick(ticket)}
-            style={{
-              backgroundColor: ticket.color,
-              color: 'white'
-            }}
-          >
-            {ticket}
-          </li>
-        ))}
+    <div classname="background">
+      <div className="ticket-list-container">
+        <h2 className="ticket-list-header">Ticket List</h2>
+        <button className="ticket-list-button" onClick={handleButtonClick}>Fetch Tickets</button>
+        <br></br>
+        Ticket IDs:
+        <ul className="ticket-list">
+          {tickets.map((ticket) => (
+            <li
+              key={ticket.id}
+              onClick={() => handleTicketClick(ticket)}
+              style={{
+                backgroundColor: ticket.color,
+                color: 'white'
+              }}
+            >
+              {ticket}
+            </li>
+          ))}
 
-      </ul>
-      {selectedTicket && (
-        <div className="selected-ticket-container" style={{ backgroundColor: selectedTicket.color }}>
-          <div className="selected-ticket-content">
-            <div className="selected-ticket-issuerid">
-              <span>Issuer ID: {selectedTicket.issuerID}</span>
-              <span>Ticket ID: {globalTicketID}</span>
-            </div>
-            <textarea className="selected-ticket-textarea" value={selectedTicket.ticketdata} readOnly />
-            <form>
-              <div>
-                <label htmlFor="response">Response:</label>
-                <textarea id="response" value={responseText} onChange={(e) => setResponseText(e.target.value)} />
+        </ul>
+        {selectedTicket && (
+          <div className="selected-ticket-container" style={{ backgroundColor: selectedTicket.color }}>
+            <div className="selected-ticket-content">
+              <div className="selected-ticket-issuerid">
+                <span>Issuer ID: {selectedTicket.issuerID}</span>
+                <span>Ticket ID: {globalTicketID}</span>
               </div>
-            </form>
+              <textarea className="selected-ticket-textarea" value={selectedTicket.ticketdata} readOnly />
+              <form>
+                <div>
+                  <label htmlFor="response">Response:</label>
+                  <textarea id="response" value={responseText} onChange={(e) => setResponseText(e.target.value)} />
+                </div>
+              </form>
+            </div>
             <button type="button" id="submitbutton" onClick={() => handleFormSubmit(globalTicketID, responseText)}>Submit</button>
+
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
