@@ -77,12 +77,6 @@ app.post('/respondTicket', async (req, res) => {
 });
 
 
-app.post('/ticketcolor', async (req, res) => {
-  const ticketcolor = await TicketItself.findOne({ ticketID: parseInt(req.body.inputticketID) }).color;
-
-  console.log("Color: ", ticketcolor);
-  res.send(ticketcolor);
-});
 
 
 app.post('/closeticket', async (req, res) => {
@@ -146,4 +140,15 @@ app.get('/respondertickets', async (req, res) => {
   console.log(passedResponderID);
   const responsetickets = await TicketItself.distinct('ticketID', { responderID: passedResponderID });
   res.json(responsetickets);
+});
+
+app.post('/colorticket', async (req, res) => {
+
+  const updatedTicket = await TicketItself.findOneAndUpdate(
+    { ticketID: req.body.inputticketID },
+    { $set: { color: req.body.inputcolor } },//something
+    { new: true }
+  );
+  res.send(updatedTicket);
+
 });

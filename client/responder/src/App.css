@@ -19,10 +19,11 @@
   width: 200px;
   height: 600px;
   overflow: auto;
+
 }
 
 .ticket-list li {
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(48, 48, 48);
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 4px;
@@ -30,10 +31,13 @@
   border: 1px solid #ccc;
   font-size: 16px;
   font-weight: bold;
+  transition-duration: 0.3s;
+
 }
 
 .ticket-list li:hover {
-  background-color: darkgray;
+  background-color: #7e7e7e;
+  box-shadow: 0px 2px 5px rgba(49, 49, 49, 0.973);
 }
 
 .selected-ticket-container {
@@ -84,7 +88,7 @@ label {
 }
 
 .ticket-list-button {
-  background-color: #a3089b;
+  background-color: #0b8800;
   border: none;
   color: white;
   padding: 12px 24px;
@@ -99,14 +103,13 @@ label {
 }
 
 .ticket-list-button:hover {
-  background-color: #aa07a2;
-  box-shadow: 0px 2px 5px rgba(73, 0, 57, 0.973);
+  background-color: #006115;
+  box-shadow: 0px 2px 5px rgba(0, 73, 0, 0.973);
 }
 
 /* Style the button with the ID of "submitbutton" */
 #submitbutton {
-  background-color: #131313;
-  border: none;
+  background-color: #0b8800;
   color: white;
   padding: 12px 24px;
   text-align: center;
@@ -121,12 +124,12 @@ label {
 
 /* On hover, change the button's background color and add a shadow effect */
 #submitbutton:hover {
-  background-color: #585858;
-  box-shadow: 0px 2px 5px rgba(49, 49, 49, 0.973);
+  background-color: #006115;
+  box-shadow: 0px 2px 5px rgba(0, 73, 0, 0.973);
 }
 
 .background {
-  background-color: #706f6f;
+  background-color: #1f1f1f;
   height: 100%;
   width: 100%;
   position: absolute;
@@ -150,4 +153,9 @@ html,
 body {
   height: 100%;
   color: white;
+}
+
+#colorpicker {
+  position: absolute;
+  right: 10%;
 }

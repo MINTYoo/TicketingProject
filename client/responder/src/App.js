@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
-
 var globalTicketID = 0;
 var localResponderID = 999;
 
@@ -12,6 +11,7 @@ function TicketList() {
   const [responseText, setResponseText] = useState('');
   const [number, setNumber] = useState(0);
   const [respondertickets, respondersetTickets] = useState([]);
+  const [color] = useState("white");
 
   // Function to handle clicking the number button with an input value
   function handleSearchClick(inputNumber) {
@@ -69,9 +69,16 @@ function TicketList() {
     setResponseText('');
   };
 
+  const handleColorChange = (event) => {
+    axios.post('http://localhost:3000/colorticket', {
+      inputticketID: globalTicketID,
+      inputcolor: event.target.value,
+    });
+    handleTicketClick(globalTicketID);
+  };
+
 
   return (
-
     <div className="background">
       <div className="ticket-list-container">
         <div className="searchcontainer">
@@ -119,6 +126,7 @@ function TicketList() {
 
         </ul>
 
+
         {selectedTicket && (
           <div className="selected-ticket-container" style={{ backgroundColor: selectedTicket.color }}>
             <div className="selected-ticket-content">
@@ -136,6 +144,14 @@ function TicketList() {
             </div>
             <button type="button" id="submitbutton" onClick={() => handleFormSubmit(globalTicketID, responseText)}>Submit</button>
             <button type="button" id="submitbutton" onClick={() => handleCloseSubmit(globalTicketID, localResponderID)}>Close</button>
+
+            <input
+              type="color"
+              id="colorpicker"
+              value={color}
+              onChange={handleColorChange}
+            />
+
           </div>
         )}
 
