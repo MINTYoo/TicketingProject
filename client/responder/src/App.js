@@ -11,19 +11,27 @@ function TicketList() {
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [responseText, setResponseText] = useState('');
   const [number, setNumber] = useState(0);
+  const [respondertickets, respondersetTickets] = useState([]);
 
   // Function to handle clicking the number button with an input value
-  function handleNumberClick(inputNumber) {
+  function handleSearchClick(inputNumber) {
     axios.post('http://localhost:3000/searchTicket', { input: inputNumber }).then((response) => {
       setSelectedTicket(response.data);
       globalTicketID = inputNumber;
     });
   }
   const handleButtonClick = () => {
-    axios.get('http://localhost:3000/tickets').then((response) => {
+    axios.get(`http://localhost:3000/tickets?inputresponderID=${localResponderID}`).then((response) => {
       setTickets(response.data);
     });
   };
+
+  const handleResponderClick = async () => {
+    axios.get(`http://localhost:3000/respondertickets?inputresponderID=${localResponderID}`).then((response) => {
+      respondersetTickets(response.data);
+    });
+  };
+
 
   const handleTicketClick = (ticket) => {
     axios.post('http://localhost:3000/searchTicket', { input: ticket }).then((response) => {
@@ -31,7 +39,6 @@ function TicketList() {
       globalTicketID = ticket;
     });
   };
-
 
 
   const handleCloseSubmit = (globalTicketID, localResponderID) => {
@@ -63,18 +70,35 @@ function TicketList() {
   };
 
 
-
-
   return (
 
-    <div classname="background">
+    <div className="background">
       <div className="ticket-list-container">
         <div className="searchcontainer">
           <div className="searchtitle">Ticket ID:</div>
           <div>
             <input type="number" id="numberInput" onChange={(e) => setNumber(parseInt(e.target.value))} />
           </div>
-          <button type="button" id="submitbutton" onClick={() => handleNumberClick(number)}>Search</button>
+          <button type="button" id="submitbutton" onClick={() => handleSearchClick(number)}>Search</button>
+        </div>
+        <div className="responder-ticket-list-container">
+
+          <h2 className="ticket-list-header">Your Tickets:</h2>
+          <button className="ticket-list-button" onClick={handleResponderClick}>Refresh</button>
+          <br></br>
+          <ul className="ticket-list">
+            {respondertickets.map((responderticket) => (
+              <li
+                key={responderticket.id}
+                onClick={() => handleTicketClick(responderticket)}
+                style={{
+                  color: 'white'
+                }}
+              >
+                {responderticket}
+              </li>
+            ))}
+          </ul>
         </div>
         <h2 className="ticket-list-header">Ticket List</h2>
         <button className="ticket-list-button" onClick={handleButtonClick}>Refresh</button>
@@ -86,7 +110,6 @@ function TicketList() {
               key={ticket.id}
               onClick={() => handleTicketClick(ticket)}
               style={{
-                backgroundColor: ticket.color,
                 color: 'white'
               }}
             >
@@ -96,11 +119,8 @@ function TicketList() {
 
         </ul>
 
-
         {selectedTicket && (
-
           <div className="selected-ticket-container" style={{ backgroundColor: selectedTicket.color }}>
-
             <div className="selected-ticket-content">
               <div className="selected-ticket-issuerid">
                 <span>Issuer ID: {selectedTicket.issuerID}</span>

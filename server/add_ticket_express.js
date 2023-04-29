@@ -77,7 +77,12 @@ app.post('/respondTicket', async (req, res) => {
 });
 
 
+app.post('/ticketcolor', async (req, res) => {
+  const ticketcolor = await TicketItself.findOne({ ticketID: parseInt(req.body.inputticketID) }).color;
 
+  console.log("Color: ", ticketcolor);
+  res.send(ticketcolor);
+});
 
 
 app.post('/closeticket', async (req, res) => {
@@ -128,7 +133,17 @@ app.listen(3000, () => {
 })
 
 
+
 app.get('/tickets', async (req, res) => {
-  const tickets = await TicketItself.distinct('ticketID', { status: { $ne: 'closed' } });
+  const passedResponderID = parseInt(req.query.inputresponderID);
+  const tickets = await TicketItself.distinct('ticketID', { $and: [{ status: { $ne: 'closed' } }, { responderID: { $ne: passedResponderID } }] });
   res.json(tickets);
+});
+
+
+app.get('/respondertickets', async (req, res) => {
+  const passedResponderID = parseInt(req.query.inputresponderID);
+  console.log(passedResponderID);
+  const responsetickets = await TicketItself.distinct('ticketID', { responderID: passedResponderID });
+  res.json(responsetickets);
 });
