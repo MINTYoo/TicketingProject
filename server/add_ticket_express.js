@@ -31,23 +31,29 @@ app.post('/submitID', (req, res) => {
 });
 
 app.post('/newTicket', (req, res) => {
-  const userInput = req.body.input;
-  console.log(userInput); // Output the user's input to the console
-
+  try{
+  const issuerID = req.body.IssuerID;
+  console.log(issuerID); // Output the user's input to the console
+  const ticketdata = req.body.ticketdata;
+  console.log(ticketdata);
+  var int_issuerID = parseInt(issuerID);
   var ticketID = Math.floor(Math.random() * 1000000000); // Generate a random 9-digit number for the ticketID field
-
   var data = {
-    "ticketdata": userInput,
+    "ticketdata": ticketdata,
     "color": null,
     "status": "open",
     "ticketID": ticketID,
-    "issuerID": userID,
+    "issuerID": int_issuerID,
     "responderID": null
   }
 
   TicketItself.insertOne(data);
+}catch(err){
+  console.error(err);
+  res.status(500).send({ error: 'Internal server error' });
+}
+  res.redirect("/");
   // You can now use the userInput variable to process the user's input
-  res.redirect('QuestionForm.html');
 });
 
 app.post('/respondTicket', async (req, res) => {

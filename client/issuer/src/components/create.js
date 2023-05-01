@@ -3,9 +3,8 @@ import { useNavigate } from "react-router";
  
 export default function Create() {
  const [form, setForm] = useState({
-   name: "",
-   position: "",
-   level: "",
+   IssuerID: "",
+   ticketdata: "",
  });
  const navigate = useNavigate();
  
@@ -21,21 +20,21 @@ export default function Create() {
    e.preventDefault();
  
    // When a post request is sent to the create url, we'll add a new record to the database.
-   const newPerson = { ...form };
+   const newTicket = { ...form };
  
-   await fetch("http://localhost:5000/record/add", {
+   await fetch("http://localhost:3000/newTicket", {
      method: "POST",
      headers: {
        "Content-Type": "application/json",
      },
-     body: JSON.stringify(newPerson),
+     body: JSON.stringify(newTicket),
    })
    .catch(error => {
      window.alert(error);
      return;
    });
  
-   setForm({ name: "", position: "", level: "" });
+   setForm({ IssuerID: "", ticketdata: "" });
    navigate("/");
  }
  
@@ -45,13 +44,21 @@ export default function Create() {
      <h3>Create New Ticket</h3>
      <form onSubmit={onSubmit}>
        <div className="form-group">
-         <label htmlFor="name">Name</label>
+         <label htmlFor="name">issuerID</label>
          <input
            type="text"
            className="form-control"
            id="name"
            value={form.name}
-           onChange={(e) => updateForm({ name: e.target.value })}
+           onChange={(e) => updateForm({ IssuerID: e.target.value })}
+         />
+         <label htmlFor="ticketData">Ticket Data</label>
+         <input  
+         type = "text" 
+         className="form-control" 
+         id = "ticketdata" 
+         alue = {form.ticketdata}
+         onChange={(e) => updateForm({ticketdata: e.target.value})}
          />
        </div>
        
@@ -59,7 +66,7 @@ export default function Create() {
        <div className="form-group">
          <input
            type="submit"
-           value="Create person"
+           value="Create ticket"
            className="btn btn-primary"
          />
        </div>
