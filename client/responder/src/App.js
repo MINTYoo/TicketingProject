@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -78,6 +78,21 @@ function TicketList() {
     });
     handleTicketClick(globalTicketID);
   };
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleTicketClick(globalTicketID);
+      handleButtonClick();
+      handleResponderClick();
+
+
+
+    }, 1000);
+    // clean up interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
 
   return (
     <div className="background">
