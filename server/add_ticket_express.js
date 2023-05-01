@@ -31,27 +31,27 @@ app.post('/submitID', (req, res) => {
 });
 
 app.post('/newTicket', (req, res) => {
-  try{
-  const issuerID = req.body.IssuerID;
-  console.log(issuerID); // Output the user's input to the console
-  const ticketdata = req.body.ticketdata;
-  console.log(ticketdata);
-  var int_issuerID = parseInt(issuerID);
-  var ticketID = Math.floor(Math.random() * 1000000000); // Generate a random 9-digit number for the ticketID field
-  var data = {
-    "ticketdata": ticketdata,
-    "color": null,
-    "status": "open",
-    "ticketID": ticketID,
-    "issuerID": int_issuerID,
-    "responderID": null
-  }
+  try {
+    const issuerID = req.body.IssuerID;
+    console.log(issuerID); // Output the user's input to the console
+    const ticketdata = req.body.ticketdata;
+    console.log(ticketdata);
+    var int_issuerID = parseInt(issuerID);
+    var ticketID = Math.floor(Math.random() * 1000000000); // Generate a random 9-digit number for the ticketID field
+    var data = {
+      "ticketdata": ticketdata,
+      "color": null,
+      "status": "open",
+      "ticketID": ticketID,
+      "issuerID": int_issuerID,
+      "responderID": null
+    }
 
-  TicketItself.insertOne(data);
-}catch(err){
-  console.error(err);
-  res.status(500).send({ error: 'Internal server error' });
-}
+    TicketItself.insertOne(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: 'Internal server error' });
+  }
   res.redirect("/");
   // You can now use the userInput variable to process the user's input
 });
@@ -128,10 +128,6 @@ app.post('/searchTicket', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-  console.log('Running on port 3000!')
-})
-
 
 
 app.get('/tickets', async (req, res) => {
@@ -157,3 +153,7 @@ app.post('/colorticket', async (req, res) => {
   res.send(updatedTicket);
 
 });
+
+app.listen(3000, () => {
+  console.log('Running on port 3000!')
+})
