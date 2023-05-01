@@ -3,7 +3,12 @@ import axios from 'axios';
 import './App.css';
 
 var globalTicketID = 0;
+
+//Temporarily hard coded... 
+//CHANGE THIS 
+//This will be the responder's ID
 var localResponderID = 999;
+
 
 function TicketList() {
   const [tickets, setTickets] = useState([]);
@@ -20,6 +25,7 @@ function TicketList() {
       globalTicketID = inputNumber;
     });
   }
+
   const handleButtonClick = () => {
     axios.get(`http://localhost:3000/tickets?inputresponderID=${localResponderID}`).then((response) => {
       setTickets(response.data);
@@ -32,14 +38,12 @@ function TicketList() {
     });
   };
 
-
   const handleTicketClick = (ticket) => {
     axios.post('http://localhost:3000/searchTicket', { input: ticket }).then((response) => {
       setSelectedTicket(response.data);
       globalTicketID = ticket;
     });
   };
-
 
   const handleCloseSubmit = (globalTicketID, localResponderID) => {
     axios.post('http://localhost:3000/closeticket', {
@@ -50,13 +54,11 @@ function TicketList() {
     handleTicketClick(globalTicketID);
   };
 
-
   const handleFormSubmit = (globalTicketID, responseString) => {
     axios.post('http://localhost:3000/respondTicket', {
       input: globalTicketID,
       responsestr: responseString, // change key name to match server-side handler
       responseResponderID: localResponderID
-
     })
       .then((response) => {
         setResponseText(response.data.message);
@@ -77,7 +79,6 @@ function TicketList() {
     handleTicketClick(globalTicketID);
   };
 
-
   return (
     <div className="background">
       <div className="ticket-list-container">
@@ -89,7 +90,6 @@ function TicketList() {
           <button type="button" id="submitbutton" onClick={() => handleSearchClick(number)}>Search</button>
         </div>
         <div className="responder-ticket-list-container">
-
           <h2 className="ticket-list-header">Your Tickets:</h2>
           <button className="ticket-list-button" onClick={handleResponderClick}>Refresh</button>
           <br></br>
@@ -123,9 +123,7 @@ function TicketList() {
               {ticket}
             </li>
           ))}
-
         </ul>
-
 
         {selectedTicket && (
           <div className="selected-ticket-container" style={{ backgroundColor: selectedTicket.color }}>
@@ -154,7 +152,6 @@ function TicketList() {
 
           </div>
         )}
-
       </div>
     </div>
   );

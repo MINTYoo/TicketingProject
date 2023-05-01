@@ -137,7 +137,6 @@ app.get('/tickets', async (req, res) => {
 
 app.get('/respondertickets', async (req, res) => {
   const passedResponderID = parseInt(req.query.inputresponderID);
-  console.log(passedResponderID);
   const responsetickets = await TicketItself.distinct('ticketID', { responderID: passedResponderID });
   res.json(responsetickets);
 });
