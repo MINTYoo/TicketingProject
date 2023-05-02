@@ -35,7 +35,6 @@ const Issuer = () => {
           console.error(error);
         }
       };
-    
     return (
       <div>
         <input

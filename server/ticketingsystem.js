@@ -129,11 +129,24 @@ app.post('/searchTicket', (req, res) => {
 });
 
 app.post('/searchIssuer', async (req, res) => {
-  const issuerID_int = parseInt(req.body.issuerID);
+  //const issuerID_int = parseInt(req.body.issuerID);
+  const searchQuery = parseInt(req.body.searchQuery);
+  console.log(searchQuery);
   //console.log(inputticketID); // Output the user's input to the console
-  const tickets = TicketItself.find( {issuerID: issuerID_int} );
-  console.log(tickets);
-  res.json(tickets);
+  try{
+    const results = await TicketItself.find({
+      "issuerID": searchQuery
+    }).toArray();
+
+    console.log(results);
+    res.json({ results });
+    
+  }
+  catch (error){
+    console.error(error);
+    res.status(500).json({message: "Interal server"});
+  }
+
 });
 
 
