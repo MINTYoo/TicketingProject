@@ -32,6 +32,11 @@ export default function Navbar() {
                Add Ticket
              </NavLink>
            </li>
+           <li className="nav-item">
+            <NavLink className="nav-link" to="/issuer">
+              Issuer
+            </NavLink>
+           </li>
          </ul>
        </div>
      </nav>

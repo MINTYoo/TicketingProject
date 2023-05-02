@@ -128,6 +128,13 @@ app.post('/searchTicket', (req, res) => {
     });
 });
 
+app.post('/searchIssuer', async (req, res) => {
+  const issuerID_int = parseInt(req.body.issuerID);
+  //console.log(inputticketID); // Output the user's input to the console
+  const tickets = TicketItself.find( {issuerID: issuerID_int} );
+  console.log(tickets);
+  res.json(tickets);
+});
 
 
 app.get('/tickets', async (req, res) => {
