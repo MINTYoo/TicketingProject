@@ -93,10 +93,35 @@ function TicketList() {
     return () => clearInterval(interval);
   }, []);
 
+  const setResponderID = (inputNumber) => {
+    localResponderID = inputNumber;
+    const ticketListContainer = document.querySelector('.ticket-list-container');
+    const loginContainer = document.querySelector('.loginContainer');
+    ticketListContainer.style.display = 'block';
+    loginContainer.style.display = 'none';
+  };
 
   return (
     <div className="background">
+      <div className="loginContainer">
+        Responder Login:
+        <p></p>
+        <input type="number" id="idInput" onChange={(e) => setNumber(parseInt(e.target.value))} />
+        <p></p>
+        <button type="button" id="loginButton" onClick={() => setResponderID(number)}>Login</button>
+
+        <div className="betaTextContainer">
+          Beta By 370 Avengers:<p></p>
+          Nick Naras <p></p>
+          Don Tran<p></p>
+          Ruben Cerda<p></p>
+          Kevin Anderson
+        </div>
+      </div>
+
+
       <div className="ticket-list-container">
+        Responder ID: {localResponderID}
         <div className="searchcontainer">
           <div className="searchtitle">Ticket ID:</div>
           <div>

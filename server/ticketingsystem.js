@@ -118,7 +118,6 @@ app.post('/searchTicket', (req, res) => {
           color: ticket.color // Include the 'color' field in the response
         });
       } else {
-        console.log('Ticket not found');
         res.status(404).send('Ticket not found');
       }
     })
@@ -133,18 +132,18 @@ app.post('/searchIssuer', async (req, res) => {
   const searchQuery = parseInt(req.body.searchQuery);
   console.log(searchQuery);
   //console.log(inputticketID); // Output the user's input to the console
-  try{
+  try {
     const results = await TicketItself.find({
       "issuerID": searchQuery
     }).toArray();
 
     console.log(results);
     res.json({ results });
-    
+
   }
-  catch (error){
+  catch (error) {
     console.error(error);
-    res.status(500).json({message: "Interal server"});
+    res.status(500).json({ message: "Interal server" });
   }
 
 });
@@ -152,7 +151,7 @@ app.post('/searchIssuer', async (req, res) => {
 
 app.get('/tickets', async (req, res) => {
   const passedResponderID = parseInt(req.query.inputresponderID);
-  const tickets = await TicketItself.distinct('ticketID', { $and: [{ status: { $ne: 'closed' } }, { responderID: { $ne: passedResponderID } }] });
+  const tickets = await TicketItself.distinct('ticketID', { $and: [{ status: { $ne: 'closed' } }, { responderID: null }] });
   res.json(tickets);
 });
 
