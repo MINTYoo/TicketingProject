@@ -36,6 +36,8 @@ const Issuer = () => {
         }
       };
     return (
+      <div className="background">
+
       <div>
         <input
           type="text"
@@ -46,6 +48,7 @@ const Issuer = () => {
         {searchResults.map(result => (
           <div key={result.issuerID}>{result.ticketdata}</div>
         ))}
+      </div>
       </div>
     );
   };

@@ -7,7 +7,8 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Create from "./components/create";
 import Issuer from "./components/issuer";
- 
+import Responder from "./components/responder";
+
 const App = () => {
  return (
    <div>
@@ -15,6 +16,7 @@ const App = () => {
      <Routes>
        <Route path="/create" element={<Create />} />
        <Route path="/issuer" element={<Issuer />} />
+       <Route path="/responder" element={<Responder />}/>
      </Routes>
    </div>
    

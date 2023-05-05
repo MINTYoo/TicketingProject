@@ -12,7 +12,7 @@ export default function Navbar() {
    <div>
      <nav className="navbar navbar-expand-lg navbar-light bg-light">
        <NavLink className="navbar-brand" to="/">
-<h1>Issuer</h1>       </NavLink>
+<h1>Ticketing System</h1>       </NavLink>
        <button
          className="navbar-toggler"
          type="button"
@@ -37,6 +37,11 @@ export default function Navbar() {
               Issuer
             </NavLink>
            </li>
+           <li className="nav-item">
+            <NavLink className = "nav-link" to="/responder">
+              Responder
+            </NavLink>
+            </li>
          </ul>
        </div>
      </nav>
