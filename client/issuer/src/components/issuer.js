@@ -139,7 +139,6 @@ function Issuer() {
           <div className="selected-ticket-container" style={{ backgroundColor: selectedTicket.color }}>
             <div className="selected-ticket-content">
               <div className="selected-ticket-issuerid">
-                <span>Issuer ID: {selectedTicket.issuerID}</span>
                 <span>Ticket ID: {globalTicketID}</span>
               </div>
               <textarea className="selected-ticket-textarea" value={selectedTicket.ticketdata} readOnly />

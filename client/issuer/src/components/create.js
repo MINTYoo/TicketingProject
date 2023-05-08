@@ -36,8 +36,8 @@ export default function Create() {
    });
  
    setForm({ IssuerID: "", ticketdata: "" });
-  alert("Message been sent!");
-   navigate("/");
+   navigate("/issuer");
+   alert("Message been sent!");
  }
  
  // This following section will display the form that takes the input from the user.

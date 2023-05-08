@@ -159,7 +159,7 @@ app.get('/tickets', async (req, res) => {
 
 app.get('/issuertickets', async (req, res) => {
   const passedIssuerID = parseInt(req.query.inputIssuerID);
-  const tickets = await TicketItself.distinct('ticketID', { $and: [{ status: { $ne: 'closed' } }, { issuerID: passedIssuerID }] });
+  const tickets = await TicketItself.distinct('ticketID', { $and: [{ issuerID: passedIssuerID }] });
   res.json(tickets);
 });
 
