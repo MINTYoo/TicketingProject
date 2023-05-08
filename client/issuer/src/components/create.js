@@ -55,13 +55,15 @@ export default function Create() {
            id="name"
            value={form.name}
            onChange={(e) => updateForm({ IssuerID: e.target.value })}
+           required
          />
-         <label htmlFor="ticketData">Ticket Data</label>
-         <input  
+         <label htmlFor="ticketData">Question</label>
+         <textarea  
          type = "text" 
          className="form-control" 
          id = "ticketdata" 
-         alue = {form.ticketdata}
+         value = {form.ticketdata}
+         required
          onChange={(e) => updateForm({ticketdata: e.target.value})}
          />
        </div>

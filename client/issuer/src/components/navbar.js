@@ -9,9 +9,9 @@ import { NavLink } from "react-router-dom";
 export default function Navbar() {
  return (
    <div>
-     <nav className="navbar navbar-expand-lg navbar-light bg-light">
+     <nav className="navbar navbar-expand-lg navbar-light bg-light" >
        <NavLink className="navbar-brand" to="/">
-<h1>Ticketing System</h1>       </NavLink>
+        <h1>Ticketing System</h1>       </NavLink>
        <button
          className="navbar-toggler"
          type="button"
@@ -41,11 +41,14 @@ export default function Navbar() {
               Responder
             </NavLink>
             </li>
-            <li className="nav-item" style={{color: 'black'}}>
-              Made By CS Avengers: Nick Naras, Don Tran, Ruben Cerda, Kevin Anderson.
-            </li>
+            
          </ul>
        </div>
+       <div  >
+          <h6 className="nav-item ml-auto" style={{ color: 'black', position: 'absolute', bottom: 0, right: 0 }}>
+            Made By CS Avengers: Nick Naras, Don Tran, Ruben Cerda, Kevin Anderson.
+          </h6>
+        </div>
      </nav>
    </div>
  );
