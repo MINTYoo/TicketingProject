@@ -1,5 +1,4 @@
 import React from "react";
- 
 // We import bootstrap to make our application look better.
 import "bootstrap/dist/css/bootstrap.css";
  
@@ -41,6 +40,9 @@ export default function Navbar() {
             <NavLink className = "nav-link" to="/responder">
               Responder
             </NavLink>
+            </li>
+            <li className="nav-item" style={{color: 'black'}}>
+              Made By CS Avengers: Nick Naras, Don Tran, Ruben Cerda, Kevin Anderson.
             </li>
          </ul>
        </div>

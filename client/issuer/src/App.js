@@ -18,9 +18,11 @@ const App = () => {
        <Route path="/issuer" element={<Issuer />} />
        <Route path="/responder" element={<Responder />}/>
      </Routes>
-     <p id="information">This is the home page of the Avengers's Automated Tickeitng System. Built and engineered by the FOX, an agent of Chaos.</p>
-     <img src ="https://i.imgur.com/mEEYFwS.png" />;
+     <p id="information">This is the home page of the Avengers's Automated Ticketing System. Built and engineered by the FOX, an agent of Chaos.</p>
+     <img src ="https://i.imgur.com/mEEYFwS.png" />
+
    </div>
+
    
  );
 };

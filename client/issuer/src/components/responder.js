@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../issuer.css';
+
 var globalTicketID = 0;
 
 //Temporarily hard coded... 
@@ -108,14 +109,6 @@ function Responder() {
         <input type="number" id="idInput" onChange={(e) => setNumber(parseInt(e.target.value))} />
         <p></p>
         <button type="button" id="loginButton" onClick={() => setResponderID(number)}>Login</button>
-
-        <div className="betaTextContainer">
-          Beta By 370 Avengers:<p></p>
-          Nick Naras <p></p>
-          Don Tran<p></p>
-          Ruben Cerda<p></p>
-          Kevin Anderson
-        </div>
       </div>
 
 
