@@ -52,7 +52,7 @@ app.post('/newTicket', (req, res) => {
     console.error(err);
     res.status(500).send({ error: 'Internal server error' });
   }
-  res.redirect("/");
+  res.redirect("/create");
   // You can now use the userInput variable to process the user's input
 });
 
@@ -82,7 +82,30 @@ app.post('/respondTicket', async (req, res) => {
   }
 });
 
+app.post('/respondIssuer', async (req, res) => {
+  if (!req.body.responsestr) {
+    return res.status(400).send({ error: 'Missing or empty input data' });
+  }
 
+  try {
+    const inputticketID = parseInt(req.body.input);
+    const inputIssuerID = parseInt(req.body.responseIssuerID);
+    var inputresponsestr = req.body.responsestr;
+    const existingTicket = await TicketItself.findOne({ ticketID: inputticketID });
+    inputresponsestr = existingTicket.ticketdata + "\n---\nIssuer: " + inputIssuerID + "\n" + inputresponsestr;
+
+    // Update the ticket with the new ticketdata value and responderID value
+    const updatedTicket = await TicketItself.findOneAndUpdate(
+      { ticketID: inputticketID },
+      { $set: { ticketdata: inputresponsestr } },
+      { new: true }
+    );
+    res.send(updatedTicket);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: 'Internal server error' });
+  }
+});
 
 
 app.post('/closeticket', async (req, res) => {
@@ -127,31 +150,16 @@ app.post('/searchTicket', (req, res) => {
     });
 });
 
-app.post('/searchIssuer', async (req, res) => {
-  //const issuerID_int = parseInt(req.body.issuerID);
-  const searchQuery = parseInt(req.body.searchQuery);
-  console.log(searchQuery);
-  //console.log(inputticketID); // Output the user's input to the console
-  try {
-    const results = await TicketItself.find({
-      "issuerID": searchQuery
-    }).toArray();
-
-    console.log(results);
-    res.json({ results });
-
-  }
-  catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Interal server" });
-  }
-
-});
-
 
 app.get('/tickets', async (req, res) => {
   const passedResponderID = parseInt(req.query.inputresponderID);
   const tickets = await TicketItself.distinct('ticketID', { $and: [{ status: { $ne: 'closed' } }, { responderID: null }] });
+  res.json(tickets);
+});
+
+app.get('/issuertickets', async (req, res) => {
+  const passedIssuerID = parseInt(req.query.inputIssuerID);
+  const tickets = await TicketItself.distinct('ticketID', { $and: [{ status: { $ne: 'closed' } }, { issuerID: passedIssuerID }] });
   res.json(tickets);
 });
 

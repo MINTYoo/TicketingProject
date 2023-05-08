@@ -36,6 +36,7 @@ export default function Create() {
    });
  
    setForm({ IssuerID: "", ticketdata: "" });
+  alert("Message been sent!");
    navigate("/");
  }
  
