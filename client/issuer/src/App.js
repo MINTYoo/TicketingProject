@@ -7,16 +7,22 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar";
 import Create from "./components/create";
 import Issuer from "./components/issuer";
- 
+import Responder from "./components/responder.js";
+import "./issuer.css";
 const App = () => {
  return (
-   <div>
+   <div className="background">
      <Navbar />
      <Routes>
        <Route path="/create" element={<Create />} />
        <Route path="/issuer" element={<Issuer />} />
+       <Route path="/responder" element={<Responder />}/>
      </Routes>
+     <p id="information">This is the home page of the Avengers's Automated Ticketing System. Built and engineered by the FOX, an agent of Chaos.</p>
+     <img src ="https://i.imgur.com/mEEYFwS.png" />
+
    </div>
+
    
  );
 };

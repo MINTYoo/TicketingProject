@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
- 
+import '../issuer.css';
+
 export default function Create() {
  const [form, setForm] = useState({
    IssuerID: "",
@@ -35,11 +36,14 @@ export default function Create() {
    });
  
    setForm({ IssuerID: "", ticketdata: "" });
-   navigate("/");
+   navigate("/issuer");
+   alert("Message been sent!");
  }
  
  // This following section will display the form that takes the input from the user.
  return (
+  <div className="background">
+
    <div>
      <h3>Create New Ticket</h3>
      <form onSubmit={onSubmit}>
@@ -51,13 +55,15 @@ export default function Create() {
            id="name"
            value={form.name}
            onChange={(e) => updateForm({ IssuerID: e.target.value })}
+           required
          />
-         <label htmlFor="ticketData">Ticket Data</label>
-         <input  
+         <label htmlFor="ticketData">Question</label>
+         <textarea  
          type = "text" 
          className="form-control" 
          id = "ticketdata" 
-         alue = {form.ticketdata}
+         value = {form.ticketdata}
+         required
          onChange={(e) => updateForm({ticketdata: e.target.value})}
          />
        </div>
@@ -72,5 +78,7 @@ export default function Create() {
        </div>
      </form>
    </div>
+   </div>
+   
  );
 }

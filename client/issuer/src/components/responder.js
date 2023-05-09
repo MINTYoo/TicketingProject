@@ -6,16 +6,16 @@ var globalTicketID = 0;
 
 //Temporarily hard coded... 
 //CHANGE THIS 
-//This will be the issuer's ID
-var localIssuerID = 999;
+//This will be the responder's ID
+var localResponderID = 999;
 
 
-function Issuer() {
+function Responder() {
   const [tickets, setTickets] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [responseText, setResponseText] = useState('');
   const [number, setNumber] = useState(0);
-  const [issuertickets, issuersetTickets] = useState([]);
+  const [respondertickets, respondersetTickets] = useState([]);
   const [color] = useState("white");
 
   // Function to handle clicking the number button with an input value
@@ -27,14 +27,14 @@ function Issuer() {
   }
 
   const handleButtonClick = () => {
-    axios.get(`http://localhost:3000/issuertickets?inputIssuerID=${localIssuerID}`).then((response) => {
+    axios.get(`http://localhost:3000/tickets?inputresponderID=${localResponderID}`).then((response) => {
       setTickets(response.data);
     });
   };
 
-  const handleIssuerClick = async () => {
-    axios.get(`http://localhost:3000/issuertickets?inputIssuerID=${localIssuerID}`).then((response) => {
-      issuersetTickets(response.data);
+  const handleResponderClick = async () => {
+    axios.get(`http://localhost:3000/respondertickets?inputresponderID=${localResponderID}`).then((response) => {
+      respondersetTickets(response.data);
     });
   };
 
@@ -45,13 +45,20 @@ function Issuer() {
     });
   };
 
+  const handleCloseSubmit = (globalTicketID, localResponderID) => {
+    axios.post('http://localhost:3000/closeticket', {
+      inputticketID: globalTicketID,
+      responseResponderID: localResponderID
+    });
+    setResponseText('');
+    handleTicketClick(globalTicketID);
+  };
 
-  //will get back to later :skull:
   const handleFormSubmit = (globalTicketID, responseString) => {
-    axios.post('http://localhost:3000/respondIssuer', {
+    axios.post('http://localhost:3000/respondTicket', {
       input: globalTicketID,
       responsestr: responseString, // change key name to match server-side handler
-      responseIssuerID: localIssuerID
+      responseResponderID: localResponderID
     })
       .then((response) => {
         setResponseText(response.data.message);
@@ -64,13 +71,20 @@ function Issuer() {
     setResponseText('');
   };
 
+  const handleColorChange = (event) => {
+    axios.post('http://localhost:3000/colorticket', {
+      inputticketID: globalTicketID,
+      inputcolor: event.target.value,
+    });
+    handleTicketClick(globalTicketID);
+  };
 
 
   useEffect(() => {
     const interval = setInterval(() => {
       handleTicketClick(globalTicketID);
       handleButtonClick();
-      handleIssuerClick();
+      handleResponderClick();
 
 
 
@@ -79,8 +93,8 @@ function Issuer() {
     return () => clearInterval(interval);
   }, []);
 
-  const setIssuerID = (inputNumber) => {
-    localIssuerID = inputNumber;
+  const setResponderID = (inputNumber) => {
+    localResponderID = inputNumber;
     const ticketListContainer = document.querySelector('.ticket-list-container');
     const loginContainer = document.querySelector('.loginContainer');
     ticketListContainer.style.display = 'block';
@@ -90,18 +104,16 @@ function Issuer() {
   return (
     <div className="background">
       <div className="loginContainer">
-        Issuer Login:
+        Responder Login:
         <p></p>
         <input type="number" id="idInput" onChange={(e) => setNumber(parseInt(e.target.value))} />
         <p></p>
-        <button type="button" id="loginButton" onClick={() => setIssuerID(number)}>Login</button>
-
- 
+        <button type="button" id="loginButton" onClick={() => setResponderID(number)}>Login</button>
       </div>
 
 
       <div className="ticket-list-container">
-        Issuer ID: {localIssuerID}
+        Responder ID: {localResponderID}
         <div className="searchcontainer">
           <div className="searchtitle">Ticket ID:</div>
           <div>
@@ -109,8 +121,24 @@ function Issuer() {
           </div>
           <button type="button" id="submitbutton" onClick={() => handleSearchClick(number)}>Search</button>
         </div>
-        
-        
+        <div className="responder-ticket-list-container">
+          <h2 className="ticket-list-header">Your Tickets:</h2>
+          <button className="ticket-list-button" onClick={handleResponderClick}>Refresh</button>
+          <br></br>
+          <ul className="ticket-list">
+            {respondertickets.map((responderticket) => (
+              <li
+                key={responderticket.id}
+                onClick={() => handleTicketClick(responderticket)}
+                style={{
+                  color: 'white'
+                }}
+              >
+                {responderticket}
+              </li>
+            ))}
+          </ul>
+        </div>
         <h2 className="ticket-list-header">Ticket List</h2>
         <button className="ticket-list-button" onClick={handleButtonClick}>Refresh</button>
         <br></br>
@@ -129,11 +157,11 @@ function Issuer() {
           ))}
         </ul>
 
-
         {selectedTicket && (
           <div className="selected-ticket-container" style={{ backgroundColor: selectedTicket.color }}>
             <div className="selected-ticket-content">
               <div className="selected-ticket-issuerid">
+                <span>Issuer ID: {selectedTicket.issuerID}</span>
                 <span>Ticket ID: {globalTicketID}</span>
               </div>
               <textarea className="selected-ticket-textarea" value={selectedTicket.ticketdata} readOnly />
@@ -145,8 +173,14 @@ function Issuer() {
               </form>
             </div>
             <button type="button" id="submitbutton" onClick={() => handleFormSubmit(globalTicketID, responseText)}>Submit</button>
+            <button type="button" id="submitbutton" onClick={() => handleCloseSubmit(globalTicketID, localResponderID)}>Close</button>
 
- 
+            <input
+              type="color"
+              id="colorpicker"
+              value={color}
+              onChange={handleColorChange}
+            />
 
           </div>
         )}
@@ -155,4 +189,4 @@ function Issuer() {
   );
 }
 
-export default Issuer;
+export default Responder;

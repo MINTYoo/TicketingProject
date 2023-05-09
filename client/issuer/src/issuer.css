@@ -1,0 +1,209 @@
+
+.ticket-list-container {
+    max-width: 1000px;
+    /* Increase max-width to make the list wider */
+    margin: 0;
+    /* Remove the margin to move the list to the left */
+    padding: 20px;
+    display: none;
+  }
+  
+  .ticket-list-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .ticket-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+    height: 600px;
+    overflow: auto;
+  
+  }
+  
+  .ticket-list li {
+    background-color: rgb(48, 48, 48);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: bold;
+    transition-duration: 0.3s;
+  
+  }
+  
+  .ticket-list li:hover {
+    background-color: #7e7e7e;
+    box-shadow: 0px 2px 5px rgba(49, 49, 49, 0.973);
+  }
+  
+  .selected-ticket-container {
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    margin-top: 20px;
+    background-color: gray;
+    padding: 20px;
+    border-radius: 4px;
+    align-items: center;
+  }
+  
+  
+  
+  .selected-ticket-container span {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .selected-ticket-container span {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+  }
+  
+  .selected-ticket-container textarea {
+  
+    width: 400px;
+    height: 400px;
+    margin-top: 10px;
+    resize: vertical;
+  }
+  
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    align-items: center;
+  }
+  
+  label {
+    text-align: right;
+  }
+  
+  .ticket-list-button {
+    background-color: #0b8800;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition-duration: 0.3s;
+  }
+  
+  .ticket-list-button:hover {
+    background-color: #006115;
+    box-shadow: 0px 2px 5px rgba(0, 73, 0, 0.973);
+  }
+  
+  /* Style the button with the ID of "submitbutton" */
+  #submitbutton {
+    background-color: #0b8800;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition-duration: 0.3s;
+  }
+  
+  /* On hover, change the button's background color and add a shadow effect */
+  #submitbutton:hover {
+    background-color: #006115;
+    box-shadow: 0px 2px 5px rgba(0, 73, 0, 0.973);
+  }
+  
+  .background {
+    background-color: #1f1f1f;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+  
+  .searchcontainer {
+    text-align: center;
+  }
+  
+  .selected-ticket-textarea {
+    position: absolute;
+    right: 10%;
+  }
+  
+  .responder-ticket-list-container {
+    position: absolute;
+    left: 20%;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    color: white;
+  }
+  
+  #colorpicker {
+    position: absolute;
+    right: 10%;
+  }
+  
+  
+  #loginButton {
+    background-color: #0b8800;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition-duration: 0.3s;
+  }
+  
+  #loginButton:hover {
+    background-color: #006115;
+    box-shadow: 0px 2px 5px rgba(0, 73, 0, 0.973);
+  }
+  
+  .loginContainer {
+    text-align: center;
+    font-size: 1.7rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  #idInput {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+  
+  .betaTextContainer {
+    font-size: .8rem;
+    opacity: 15%;
+    position: absolute;
+  
+    transform: translate(-600%, 170%);
+  }
