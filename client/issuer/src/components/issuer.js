@@ -114,7 +114,7 @@ function Issuer() {
         <h2 className="ticket-list-header">Ticket List</h2>
         <button className="ticket-list-button" onClick={handleButtonClick}>Refresh</button>
         <br></br>
-        Open Tickets:
+        Your Tickets:
         <ul className="ticket-list">
           {tickets.map((ticket) => (
             <li
