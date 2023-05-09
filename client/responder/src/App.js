@@ -99,6 +99,8 @@ function TicketList() {
     const loginContainer = document.querySelector('.loginContainer');
     ticketListContainer.style.display = 'block';
     loginContainer.style.display = 'none';
+    handleButtonClick();
+    handleResponderClick();
   };
 
   return (
