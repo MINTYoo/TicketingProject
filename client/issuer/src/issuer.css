@@ -207,3 +207,32 @@
   
     transform: translate(-600%, 170%);
   }
+
+.intro-container {
+
+
+  text-align: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.running-instructions{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 44rem;
+  height: 2rem;
+  margin-top: 200px;
+}
+
+.intro{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40rem;
+  height: 2rem;
+}
+
+.Logo {
+  margin-top: 150px;
+}
